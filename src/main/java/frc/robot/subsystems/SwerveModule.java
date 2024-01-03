@@ -36,7 +36,7 @@ public class SwerveModule {
 
   private final SimpleMotorFeedforward feedforward =
       new SimpleMotorFeedforward(
-          Constants.Swerve.driveKS, Constants.Swerve.driveKV, Constants.Swerve.driveKA);
+          Constants.Swerve.DRIVE_KS, Constants.Swerve.DRIVE_KV, Constants.Swerve.DRIVE_KA);
 
   public SwerveModule(int moduleNumber, SwerveModuleConstants moduleConstants) {
     this.moduleNumber = moduleNumber;
@@ -84,15 +84,15 @@ public class SwerveModule {
   private void configAngleMotor() {
     angleMotor.restoreFactoryDefaults();
     CANSparkMaxUtil.setCANSparkMaxBusUsage(angleMotor, Usage.kPositionOnly);
-    angleMotor.setSmartCurrentLimit(Constants.Swerve.angleContinuousCurrentLimit);
-    angleMotor.setInverted(Constants.Swerve.angleInvert);
-    angleMotor.setIdleMode(Constants.Swerve.angleNeutralMode);
-    integratedAngleEncoder.setPositionConversionFactor(Constants.Swerve.angleConversionFactor);
-    angleController.setP(Constants.Swerve.angleKP);
-    angleController.setI(Constants.Swerve.angleKI);
-    angleController.setD(Constants.Swerve.angleKD);
-    angleController.setFF(Constants.Swerve.angleKFF);
-    angleMotor.enableVoltageCompensation(Constants.Swerve.voltageComp);
+    angleMotor.setSmartCurrentLimit(Constants.Swerve.ANGLE_CONTINUOUS_CURRENT_LIMIT);
+    angleMotor.setInverted(Constants.Swerve.ANGLE_INVERT);
+    angleMotor.setIdleMode(Constants.Swerve.ANGLE_NEUTRAL_MODE);
+    integratedAngleEncoder.setPositionConversionFactor(Constants.Swerve.ANGLE_CONVERSION_FACTOR);
+    angleController.setP(Constants.Swerve.ANGLE_KP);
+    angleController.setI(Constants.Swerve.ANGLE_KI);
+    angleController.setD(Constants.Swerve.ANGLE_KD);
+    angleController.setFF(Constants.Swerve.ANGLE_KFF);
+    angleMotor.enableVoltageCompensation(Constants.Swerve.VOLTAGE_COMP);
     angleMotor.burnFlash();
     resetToAbsolute();
   }
@@ -100,23 +100,23 @@ public class SwerveModule {
   private void configDriveMotor() {
     driveMotor.restoreFactoryDefaults();
     CANSparkMaxUtil.setCANSparkMaxBusUsage(driveMotor, Usage.kAll);
-    driveMotor.setSmartCurrentLimit(Constants.Swerve.driveContinuousCurrentLimit);
-    driveMotor.setInverted(Constants.Swerve.driveInvert);
-    driveMotor.setIdleMode(Constants.Swerve.driveNeutralMode);
-    driveEncoder.setVelocityConversionFactor(Constants.Swerve.driveConversionVelocityFactor);
-    driveEncoder.setPositionConversionFactor(Constants.Swerve.driveConversionPositionFactor);
-    driveController.setP(Constants.Swerve.angleKP);
-    driveController.setI(Constants.Swerve.angleKI);
-    driveController.setD(Constants.Swerve.angleKD);
-    driveController.setFF(Constants.Swerve.angleKFF);
-    driveMotor.enableVoltageCompensation(Constants.Swerve.voltageComp);
+    driveMotor.setSmartCurrentLimit(Constants.Swerve.DRIVE_CONTINUOUS_CURRENT_LIMIT);
+    driveMotor.setInverted(Constants.Swerve.DRIVE_INVERT);
+    driveMotor.setIdleMode(Constants.Swerve.DRIVE_NEUTRAL_MODE);
+    driveEncoder.setVelocityConversionFactor(Constants.Swerve.DRIVE_CONVERSION_VELOCITY_FACTOR);
+    driveEncoder.setPositionConversionFactor(Constants.Swerve.DRIVE_CONVERSION_POSITION_FACTOR);
+    driveController.setP(Constants.Swerve.ANGLE_KP);
+    driveController.setI(Constants.Swerve.ANGLE_KI);
+    driveController.setD(Constants.Swerve.ANGLE_KD);
+    driveController.setFF(Constants.Swerve.ANGLE_KFF);
+    driveMotor.enableVoltageCompensation(Constants.Swerve.VOLTAGE_COMP);
     driveMotor.burnFlash();
     driveEncoder.setPosition(0.0);
   }
 
   private void setSpeed(SwerveModuleState desiredState, boolean isOpenLoop) {
     if (isOpenLoop) {
-      double percentOutput = desiredState.speedMetersPerSecond / Constants.Swerve.maxSpeed;
+      double percentOutput = desiredState.speedMetersPerSecond / Constants.Swerve.MAX_SPEED;
       driveMotor.set(percentOutput);
     } else {
       driveController.setReference(
@@ -130,7 +130,7 @@ public class SwerveModule {
   private void setAngle(SwerveModuleState desiredState) {
     // Prevent rotating module if speed is less then 1%. Prevents jittering.
     Rotation2d angle =
-        (Math.abs(desiredState.speedMetersPerSecond) <= (Constants.Swerve.maxSpeed * 0.01))
+        (Math.abs(desiredState.speedMetersPerSecond) <= (Constants.Swerve.MAX_SPEED * 0.01))
             ? lastAngle
             : desiredState.angle;
 
