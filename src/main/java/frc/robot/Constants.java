@@ -1,5 +1,6 @@
 package frc.robot;
 
+import com.ctre.phoenix6.signals.SensorDirectionValue;
 import com.revrobotics.CANSparkBase.IdleMode;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
@@ -78,7 +79,7 @@ public final class Constants {
         public static final boolean ANGLE_INVERT = false;
 
         /* Angle Encoder Invert */
-        public static final boolean CAN_CODER_INVERT = false;
+        public static final SensorDirectionValue CAN_CODER_INVERT = SensorDirectionValue.Clockwise_Positive;
 
         /* Module Specific Constants */
         /* Front Left Module - Module 0 */
