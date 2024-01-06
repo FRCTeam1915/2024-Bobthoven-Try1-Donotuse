@@ -1,6 +1,7 @@
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.sensors.CANCoder;
+import com.ctre.phoenix6.configs.CANcoderConfiguration;
+import com.ctre.phoenix6.hardware.CANcoder;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkBase.ControlType;
 import com.revrobotics.CANSparkLowLevel.MotorType;
@@ -29,7 +30,7 @@ public class SwerveModule {
 
     private RelativeEncoder driveEncoder;
     private RelativeEncoder integratedAngleEncoder;
-    private CANCoder angleEncoder;
+    private CANcoder angleEncoder;
 
     private final SparkPIDController driveController;
     private final SparkPIDController angleController;
@@ -43,7 +44,7 @@ public class SwerveModule {
         angleOffset = moduleConstants.angleOffset;
 
         /* Angle Encoder Config */
-        angleEncoder = new CANCoder(moduleConstants.cancoderID);
+        angleEncoder = new CANcoder(moduleConstants.cancoderID);
         configAngleEncoder();
 
         /* Angle Motor Config */
@@ -76,9 +77,9 @@ public class SwerveModule {
     }
 
     private void configAngleEncoder() {
-        angleEncoder.configFactoryDefault();
+        angleEncoder.getConfigurator().apply(new CANcoderConfiguration());
         CANCoderUtil.setCANCoderBusUsage(angleEncoder, CCUsage.kMinimal);
-        angleEncoder.configAllSettings(Robot.ctreConfigs.swerveCanCoderConfig);
+        angleEncoder.getConfigurator().apply(Robot.ctreConfigs.swerveCanCoderConfig);
     }
 
     private void configAngleMotor() {
@@ -143,7 +144,7 @@ public class SwerveModule {
     }
 
     public Rotation2d getCanCoder() {
-        return Rotation2d.fromDegrees(angleEncoder.getAbsolutePosition());
+        return Rotation2d.fromDegrees(angleEncoder.getAbsolutePosition().getValueAsDouble());
     }
 
     public SwerveModuleState getState() {
