@@ -89,8 +89,8 @@ public final class Constants {
         /* Module Specific Constants */
         /* Front Left Module - Module 0 */
         public static final class Mod0 {
-            public static final int DRIVE_MOTOR_ID = 4;
-            public static final int ANGLE_MOTOR_ID = 3;
+            public static final int DRIVE_MOTOR_ID = 12;
+            public static final int ANGLE_MOTOR_ID = 11;
             public static final int CAN_CODER_ID = 1;
             public static final Rotation2d ANGLE_OFFSET = Rotation2d.fromDegrees(327.48046875);
             public static final SwerveModuleConstants CONSTANTS =
@@ -109,8 +109,8 @@ public final class Constants {
 
         /* Back Left Module - Module 2 */
         public static final class Mod2 {
-            public static final int DRIVE_MOTOR_ID = 2;
-            public static final int ANGLE_MOTOR_ID = 1;
+            public static final int DRIVE_MOTOR_ID = 18;
+            public static final int ANGLE_MOTOR_ID = 17;
             public static final int CAN_CODER_ID = 3;
             public static final Rotation2d ANGLE_OFFSET = Rotation2d.fromDegrees(55.01953125);
             public static final SwerveModuleConstants CONSTANTS =

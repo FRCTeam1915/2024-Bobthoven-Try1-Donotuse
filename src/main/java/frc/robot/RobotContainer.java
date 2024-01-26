@@ -31,9 +31,9 @@ public class RobotContainer {
     private final CommandXboxController m_IntakeController = new CommandXboxController(OperatorConstants.kIntakeControllerPort);
 
     /* Drive Controls */
-    private final int translationAxis = XboxController.Axis.kLeftY.value;
-    private final int strafeAxis = XboxController.Axis.kLeftX.value;
-    private final int rotationAxis = XboxController.Axis.kRightX.value;
+    private final int translationAxis = (int) m_driverController.getLeftY();
+    private final int strafeAxis = (int) m_driverController.getLeftX();
+    private final int rotationAxis = (int) m_driverController.getRightX();
 
     /* Driver Buttons */
     
@@ -58,6 +58,7 @@ public class RobotContainer {
                         () -> -m_driverController.getRawAxis(rotationAxis),
                         () -> m_driverController.x().getAsBoolean()));
 
+                        
 
         // Configure the button bindings
         configureButtonBindings();
