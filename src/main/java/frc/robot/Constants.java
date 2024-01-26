@@ -81,6 +81,11 @@ public final class Constants {
         /* Angle Encoder Invert */
         public static final SensorDirectionValue CAN_CODER_INVERT = SensorDirectionValue.Clockwise_Positive;
 
+        public static class OperatorConstants{
+                public static final int kDriverControllerPort = 0;
+                public static final int kIntakeControllerPort = 1;
+        }
+
         /* Module Specific Constants */
         /* Front Left Module - Module 0 */
         public static final class Mod0 {
