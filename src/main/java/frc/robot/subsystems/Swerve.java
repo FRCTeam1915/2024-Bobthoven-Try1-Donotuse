@@ -1,7 +1,5 @@
 package frc.robot.subsystems;
 
-import com.ctre.phoenix6.configs.Pigeon2Configuration;
-import com.ctre.phoenix6.hardware.Pigeon2;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
@@ -26,7 +24,7 @@ public class Swerve extends SubsystemBase {
     private Field2d field;
 
     public Swerve() {
-        gyro = new ADIS16470_IMU();
+        //gyro = new ADIS16470_IMU();
         //gyro.getConfigurator().apply(new Pigeon2Configuration()); //Not usuable for ADIS_IMU 
         zeroGyro();
 
@@ -109,14 +107,14 @@ public class Swerve extends SubsystemBase {
     }
 
     public Rotation2d getYaw() {
-        double angle = 360 - gyro.getAngle(gyro.getYawAxis());
-        double angle2 =  gyro.getAngle(gyro.getYawAxis());
+        double angleOne = 360 - gyro.getAngle(gyro.getYawAxis());
+        double angleTwo =  gyro.getAngle(gyro.getYawAxis());
 
 
 
         return (Constants.Swerve.INVERT_GYRO)
-                ? Rotation2d.fromDegrees(angle)
-                : Rotation2d.fromDegrees(angle2);
+                ? Rotation2d.fromDegrees(angleOne)
+                : Rotation2d.fromDegrees(angleTwo);
     }
 
     @Override
