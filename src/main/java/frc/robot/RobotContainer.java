@@ -31,17 +31,17 @@ public class RobotContainer {
     private final CommandXboxController m_IntakeController = new CommandXboxController(OperatorConstants.kIntakeControllerPort);
 
     /* Drive Controls */
-    private final int translationAxis = (int) m_driverController.getLeftY();
-    private final int strafeAxis = (int) m_driverController.getLeftX();
-    private final int rotationAxis = (int) m_driverController.getRightX();
+    private final double translationAxis = m_driverController.getLeftY();
+    private final double strafeAxis =  m_driverController.getLeftX();
+    private final double rotationAxis = m_driverController.getRightX();
 
     /* Driver Buttons */
     
     //Code for using joysticks
     private final JoystickButton zeroGyro =
             new JoystickButton(driver, XboxController.Button.kY.value);
-   // private final XboxController robotCentric =
-//       new XboxController(m_driverController, XboxController.Button.kLeftBumper.value);
+    private final XboxController robotCentric =
+       new XboxController(XboxController.Button.kLeftBumper.value);
     
     //private final XboxController zeroGyro = new XboxController(m_driverController, XboxController.Button.kY.value);
 
@@ -53,9 +53,9 @@ public class RobotContainer {
         s_Swerve.setDefaultCommand(
                 new TeleopSwerve(
                         s_Swerve,
-                        () -> -m_driverController.getRawAxis(translationAxis),
-                        () -> -m_driverController.getRawAxis(strafeAxis),
-                        () -> -m_driverController.getRawAxis(rotationAxis),
+                        () -> -m_driverController.getRawAxis((int) translationAxis),
+                        () -> -m_driverController.getRawAxis((int) strafeAxis),
+                        () -> -m_driverController.getRawAxis((int) rotationAxis),
                         () -> m_driverController.x().getAsBoolean()));
 
                         
