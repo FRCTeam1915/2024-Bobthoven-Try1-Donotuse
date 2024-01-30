@@ -95,7 +95,7 @@ public class SwerveModule {
         angleController.setFF(Constants.Swerve.ANGLE_KFF);
         angleMotor.enableVoltageCompensation(Constants.Swerve.VOLTAGE_COMP);
         angleMotor.burnFlash();
-        resetToAbsolute();
+        // resetToAbsolute();
     }
 
     private void configDriveMotor() {

@@ -94,7 +94,7 @@ public final class Constants {
             public static final int ANGLE_MOTOR_ID = 11;
             public static final int CAN_CODER_ID = 21;
         //     public static final Rotation2d ANGLE_OFFSET = Rotation2d.fromDegrees(327.48046875);
-            public static final Rotation2d ANGLE_OFFSET = new Rotation2d(0);
+            public static final Rotation2d ANGLE_OFFSET =  Rotation2d.fromDegrees(0);
             public static final SwerveModuleConstants CONSTANTS =
                     new SwerveModuleConstants(DRIVE_MOTOR_ID, ANGLE_MOTOR_ID, CAN_CODER_ID, ANGLE_OFFSET);
         }
@@ -105,7 +105,7 @@ public final class Constants {
             public static final int ANGLE_MOTOR_ID = 13;
             public static final int CAN_CODER_ID = 22;
             //public static final Rotation2d ANGLE_OFFSET = Rotation2d.fromDegrees(286.34765625);
-            public static final Rotation2d ANGLE_OFFSET = new Rotation2d(0);
+            public static final Rotation2d ANGLE_OFFSET =  Rotation2d.fromDegrees(0);
             public static final SwerveModuleConstants CONSTANTS =
                     new SwerveModuleConstants(DRIVE_MOTOR_ID, ANGLE_MOTOR_ID, CAN_CODER_ID, ANGLE_OFFSET);
         }
@@ -116,7 +116,7 @@ public final class Constants {
             public static final int ANGLE_MOTOR_ID = 17;
             public static final int CAN_CODER_ID = 23;
             //public static final Rotation2d ANGLE_OFFSET = Rotation2d.fromDegrees(55.01953125);
-            public static final Rotation2d ANGLE_OFFSET = new Rotation2d(0);
+            public static final Rotation2d ANGLE_OFFSET = Rotation2d.fromDegrees(0);
             public static final SwerveModuleConstants CONSTANTS =
                     new SwerveModuleConstants(DRIVE_MOTOR_ID, ANGLE_MOTOR_ID, CAN_CODER_ID, ANGLE_OFFSET);
         }
@@ -127,7 +127,7 @@ public final class Constants {
             public static final int ANGLE_MOTOR_ID = 16;
             public static final int CAN_CODER_ID = 24;
             //public static final Rotation2d ANGLE_OFFSET = Rotation2d.fromDegrees(67.939453125);
-            public static final Rotation2d ANGLE_OFFSET = new Rotation2d(0);
+            public static final Rotation2d ANGLE_OFFSET = Rotation2d.fromDegrees(0);
             public static final SwerveModuleConstants CONSTANTS =
                     new SwerveModuleConstants(DRIVE_MOTOR_ID, ANGLE_MOTOR_ID, CAN_CODER_ID, ANGLE_OFFSET);
         }
