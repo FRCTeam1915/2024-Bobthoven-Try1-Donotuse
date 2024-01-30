@@ -5,12 +5,10 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
-import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.Swerve.OperatorConstants;
 import frc.robot.autos.*;
@@ -25,39 +23,36 @@ import frc.robot.subsystems.*;
  */
 public class RobotContainer {
     /* Controllers */
-    private final Joystick driver = new Joystick(0);
+    //private final Joystick driver = new Joystick(0);
+
 
     private final CommandXboxController m_driverController = new CommandXboxController(OperatorConstants.kDriverControllerPort);
     private final CommandXboxController m_IntakeController = new CommandXboxController(OperatorConstants.kIntakeControllerPort);
-
+    
     /* Drive Controls */
-    private final double translationAxis = m_driverController.getLeftY();
-    private final double strafeAxis =  m_driverController.getLeftX();
-    private final double rotationAxis = m_driverController.getRightX();
+    private final int translationAxis = XboxController.Axis.kLeftY.value;
+    private final int strafeAxis = XboxController.Axis.kLeftX.value;
+    private final int rotationAxis = XboxController.Axis.kRightX.value;
 
     /* Driver Buttons */
     
     //Code for using joysticks
-    private final JoystickButton zeroGyro =
-            new JoystickButton(driver, XboxController.Button.kY.value);
     private final XboxController robotCentric =
        new XboxController(XboxController.Button.kLeftBumper.value);
     
-    //private final XboxController zeroGyro = new XboxController(m_driverController, XboxController.Button.kY.value);
-
     /* Subsystems */
     private final Swerve s_Swerve = new Swerve();
 
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
     public RobotContainer() {
         s_Swerve.setDefaultCommand(
+
                 new TeleopSwerve(
                         s_Swerve,
-                        () -> -m_driverController.getRawAxis((int) translationAxis),
-                        () -> -m_driverController.getRawAxis((int) strafeAxis),
-                        () -> -m_driverController.getRawAxis((int) rotationAxis),
+                        () -> -m_driverController.getRawAxis(translationAxis),
+                        () -> -m_driverController.getRawAxis(strafeAxis),
+                        () -> -m_driverController.getRawAxis(rotationAxis),
                         () -> m_driverController.x().getAsBoolean()));
-
                         
 
         // Configure the button bindings
@@ -73,11 +68,8 @@ public class RobotContainer {
     private void configureButtonBindings() {
         /* Driver Buttons */
 
-
-        zeroGyro.onTrue(new InstantCommand(() -> s_Swerve.zeroGyro()));
-        
-        
-        //zeroGyro.whenPressed(new InstantCommand(() -> s_Swerve.zeroGyro()));
+        Trigger driver_a_button = m_driverController.a();
+        driver_a_button.whileTrue(new InstantCommand(() -> s_Swerve.zeroGyro()));
     }
 
     /**
@@ -86,8 +78,6 @@ public class RobotContainer {
      * @return the command to run in autonomous
      */
 
-    Trigger abutton = m_driverController.a();
-    
 
     public Command getAutonomousCommand() {
         // An ExampleCommand will run in autonomous
