@@ -149,6 +149,7 @@ public final class Constants {
                         K_MAX_ANGULAR_SPEED_RADIANS_PER_SECOND, K_MAX_ANGULAR_SPEED_RADIANS_PER_SECOND_SQUARED);
     }
 
-public static final int intake = 1;
+public static final int pickUpID = 31;
+public static final int shooterID= 32;
 
 }

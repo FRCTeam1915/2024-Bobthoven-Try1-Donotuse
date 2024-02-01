@@ -4,6 +4,8 @@
 
 package frc.robot;
 
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -14,6 +16,7 @@ import frc.robot.Constants.Swerve.OperatorConstants;
 import frc.robot.autos.*;
 import frc.robot.commands.*;
 import frc.robot.subsystems.*;
+
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -70,6 +73,18 @@ public class RobotContainer {
 
         Trigger driver_a_button = m_driverController.a();
         driver_a_button.whileTrue(new InstantCommand(() -> s_Swerve.zeroGyro()));
+
+        Trigger rightBumper = m_IntakeController.rightBumper();
+
+        final Intake upperMotor;
+        upperMotor = new Intake();
+        rightBumper.whileTrue(new shooter(upperMotor, true).repeatedly());
+
+        final Intake lowerMotor;
+        lowerMotor = new Intake();
+        Trigger leftBumper = m_IntakeController.leftBumper();
+        leftBumper.whileTrue(new pickUp(lowerMotor, true).repeatedly());
+
     }
 
     /**

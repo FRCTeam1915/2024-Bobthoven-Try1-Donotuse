@@ -6,14 +6,12 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Intake;
 
 public class pickUp extends CommandBase{
-    Intake intake;
+    Intake lowerMotor;
     boolean in;
 
-    public pickUp(Intake tintake, boolean tin){
+    public pickUp(Intake lowerMotor, boolean tin){
         in = tin;
-        intake = tintake;
-
-        addRequirements(intake);
+        addRequirements(lowerMotor);
     }
 
 
