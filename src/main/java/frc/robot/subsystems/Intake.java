@@ -15,7 +15,8 @@ public class Intake extends SubsystemBase {
 
     public static TalonSRX intake;
     public Intake() {
-        //lowerMotor = new TalonSRX(Constants.pickUpID);
+        //Defines the upper and lower motors for the the shooter and intake
+        lowerMotor = new TalonSRX(Constants.pickUpID);
         upperMotor = new TalonSRX(Constants.shooterID);
         
     }
@@ -26,6 +27,6 @@ public class Intake extends SubsystemBase {
     }
 
     public void stop() {
-        
+
     }
 }

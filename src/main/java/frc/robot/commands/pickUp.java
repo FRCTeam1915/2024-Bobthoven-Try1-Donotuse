@@ -17,13 +17,14 @@ public class pickUp extends CommandBase{
 
     @Override
     public void execute(){
-        Intake.intake.set(ControlMode.PercentOutput, .5);
+        //Pick up speed for intake
+        Intake.lowerMotor.set(ControlMode.PercentOutput, .5);
     }
 
 
     @Override
     public void end(boolean interrupted){
-        Intake.intake.set(ControlMode.PercentOutput,0);
+        Intake.lowerMotor.set(ControlMode.PercentOutput,0);
     }
 
 
