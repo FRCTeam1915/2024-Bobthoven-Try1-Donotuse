@@ -150,6 +150,8 @@ public final class Constants {
     }
 
 public static final int pickUpID = 31;
-public static final int shooterID= 32;
+public static final int upperMotorID = 32;
+public static final int shooterOneID = 33;
+public static final int shooterTwoID = 34;
 
 }

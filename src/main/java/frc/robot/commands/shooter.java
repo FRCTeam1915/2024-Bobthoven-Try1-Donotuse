@@ -7,16 +7,18 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Intake;
 
 public class shooter extends CommandBase{
-    Intake upperMotor;
+    Intake shooterMotorOne;
+    Intake shooterMotorTwo;
     boolean in;
-    public shooter(Intake upperMotor, boolean tin){
+    public shooter(Intake shooterMotorOne, Intake shooterMotorTwo, boolean tin) {
         in = tin;
-        addRequirements(upperMotor);
+       // addRequirements(upperMotor);
     }
 
     @Override
     public void execute(){
         //Shoots note out, speed can be changed
-        Intake.upperMotor.set(ControlMode.PercentOutput, -1);
+        Intake.shooterMotorOne.set(ControlMode.PercentOutput, -1);
+        Intake.shooterMotorTwo.set(ControlMode.PercentOutput, -1);
     }
 }

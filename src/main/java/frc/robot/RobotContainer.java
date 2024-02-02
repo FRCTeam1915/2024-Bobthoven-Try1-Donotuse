@@ -74,16 +74,21 @@ public class RobotContainer {
         Trigger driver_a_button = m_driverController.a();
         driver_a_button.whileTrue(new InstantCommand(() -> s_Swerve.zeroGyro()));
 
-        Trigger rightBumper = m_IntakeController.rightBumper();
+        
 
         final Intake upperMotor;
-        upperMotor = new Intake();
-        rightBumper.whileTrue(new shooter(upperMotor, true).repeatedly());
-
         final Intake lowerMotor;
+        upperMotor = new Intake();
         lowerMotor = new Intake();
-        Trigger leftBumper = m_IntakeController.leftBumper();
-        leftBumper.whileTrue(new pickUp(lowerMotor, true).repeatedly());
+
+        Trigger Bbutton = m_IntakeController.b();
+        Bbutton.whileTrue(new upperIntake(upperMotor, true).repeatedly());
+    
+        Trigger Xbutton = m_IntakeController.x();
+        Xbutton.whileTrue(new pickUp(lowerMotor, true).repeatedly());
+
+        Trigger Ybutton = m_IntakeController.y();
+        Ybutton.whileTrue(new lowerIntakeDrop(lowerMotor, true).repeatedly());
 
     }
 
