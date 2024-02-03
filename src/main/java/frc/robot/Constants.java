@@ -1,5 +1,6 @@
 package frc.robot;
 
+import com.ctre.phoenix6.signals.*;
 import com.ctre.phoenix6.signals.SensorDirectionValue;
 import com.revrobotics.CANSparkBase.IdleMode;
 import edu.wpi.first.math.geometry.Rotation2d;
@@ -8,6 +9,7 @@ import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.math.util.Units;
 import frc.lib.config.SwerveModuleConstants;
+
 
 public final class Constants {
 
@@ -19,8 +21,8 @@ public final class Constants {
         public static final boolean INVERT_GYRO = false; // Always ensure Gyro is CCW+ CW-
 
         /* Drivetrain Constants */
-        public static final double TRACK_WIDTH = Units.inchesToMeters(21.73);
-        public static final double WHEEL_BASE = Units.inchesToMeters(21.73);
+        public static final double TRACK_WIDTH = Units.inchesToMeters(28);
+        public static final double WHEEL_BASE = Units.inchesToMeters(32);
         public static final double WHEEL_DIAMETER = Units.inchesToMeters(4.0);
         public static final double WHEEL_CIRCUMFERENCE = WHEEL_DIAMETER * Math.PI;
 
@@ -89,10 +91,22 @@ public final class Constants {
 
 
         public static final class magnetOffset {
-                public static final double Mod0 = 0.0068359375;
-                public static final double Mod1 = 0.4892578125;
-                public static final double Mod2 = 0;
-                public static final double Mod3 = 0;
+                public static final class Mod0 {
+                        public static final double magnetOffset = 0;
+                        public static final AbsoluteSensorRangeValue withAbsoluteSensorRange = AbsoluteSensorRangeValue.Signed_PlusMinusHalf;
+                }
+                public static final class Mod1 {
+                        public static final double magnetOffset = 0;
+                        public static final AbsoluteSensorRangeValue withAbsoluteSensorRange = AbsoluteSensorRangeValue.Signed_PlusMinusHalf;
+                }
+                public static final class Mod2 {
+                        public static final double magnetOffset = 0;
+                        public static final AbsoluteSensorRangeValue withAbsoluteSensorRange = AbsoluteSensorRangeValue.Signed_PlusMinusHalf;
+                }
+                public static final class Mod3 {
+                        public static final double magnetOffset = -0.241;
+                        public static final AbsoluteSensorRangeValue withAbsoluteSensorRange = AbsoluteSensorRangeValue.Signed_PlusMinusHalf;
+                }
         }
 
 
@@ -127,7 +141,7 @@ public final class Constants {
             public static final int CAN_CODER_ID = 23;
             public static final double magnetOffset = 0;
             //public static final Rotation2d ANGLE_OFFSET = Rotation2d.fromDegrees(55.01953125);
-            public static final Rotation2d ANGLE_OFFSET = Rotation2d.fromDegrees(0);
+            public static final Rotation2d ANGLE_OFFSET = Rotation2d.fromDegrees(45);
             public static final SwerveModuleConstants CONSTANTS =
                     new SwerveModuleConstants(DRIVE_MOTOR_ID, ANGLE_MOTOR_ID, CAN_CODER_ID, ANGLE_OFFSET);
         }

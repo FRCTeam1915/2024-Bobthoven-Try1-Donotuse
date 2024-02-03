@@ -29,10 +29,10 @@ public class Swerve extends SubsystemBase {
         zeroGyro();
 
         mSwerveMods = new SwerveModule[] {
-                new SwerveModule(0, Constants.Swerve.Mod0.CONSTANTS, Constants.Swerve.magnetOffset.Mod0),
-                new SwerveModule(1, Constants.Swerve.Mod1.CONSTANTS, Constants.Swerve.magnetOffset.Mod1),
-                new SwerveModule(2, Constants.Swerve.Mod2.CONSTANTS, Constants.Swerve.magnetOffset.Mod2),
-                new SwerveModule(3, Constants.Swerve.Mod3.CONSTANTS, Constants.Swerve.magnetOffset.Mod3)
+                new SwerveModule(0, Constants.Swerve.Mod0.CONSTANTS, Constants.Swerve.magnetOffset.Mod0.magnetOffset, Constants.Swerve.magnetOffset.Mod0.withAbsoluteSensorRange),
+                new SwerveModule(1, Constants.Swerve.Mod1.CONSTANTS, Constants.Swerve.magnetOffset.Mod1.magnetOffset, Constants.Swerve.magnetOffset.Mod1.withAbsoluteSensorRange),
+                new SwerveModule(2, Constants.Swerve.Mod2.CONSTANTS,  Constants.Swerve.magnetOffset.Mod2.magnetOffset, Constants.Swerve.magnetOffset.Mod2.withAbsoluteSensorRange),
+                new SwerveModule(3, Constants.Swerve.Mod3.CONSTANTS,  Constants.Swerve.magnetOffset.Mod3.magnetOffset, Constants.Swerve.magnetOffset.Mod3.withAbsoluteSensorRange)
         };
 
         swerveOdometry = new SwerveDriveOdometry(
