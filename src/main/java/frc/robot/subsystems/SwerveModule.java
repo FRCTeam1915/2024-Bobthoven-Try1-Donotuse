@@ -1,5 +1,6 @@
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.sensors.SensorInitializationStrategy;
 import com.ctre.phoenix6.configs.CANcoderConfiguration;
 import com.ctre.phoenix6.hardware.CANcoder;
 import com.revrobotics.CANSparkMax;
@@ -39,13 +40,17 @@ public class SwerveModule {
             new SimpleMotorFeedforward(
                     Constants.Swerve.DRIVE_KS, Constants.Swerve.DRIVE_KV, Constants.Swerve.DRIVE_KA);
 
-    public SwerveModule(int moduleNumber, SwerveModuleConstants moduleConstants) {
+    public SwerveModule(int moduleNumber, SwerveModuleConstants moduleConstants, double magoffset) {
         this.moduleNumber = moduleNumber;
         angleOffset = moduleConstants.angleOffset;
 
         /* Angle Encoder Config */
         angleEncoder = new CANcoder(moduleConstants.cancoderID);
         configAngleEncoder();
+        // angleEncoder.setPositionToAbsolute();
+        // angleEncoder.configSensorInitializationStrategy(SensorInitializationStrategy.BootToAbsolutePosition);
+
+
 
         /* Angle Motor Config */
         angleMotor = new CANSparkMax(moduleConstants.angleMotorID, MotorType.kBrushless);
@@ -60,6 +65,12 @@ public class SwerveModule {
         configDriveMotor();
 
         lastAngle = getState().angle;
+
+
+        CANcoderConfiguration tswerveCanCoderConfig = new CANcoderConfiguration();
+        tswerveCanCoderConfig.MagnetSensor.MagnetOffset = magoffset;
+        angleEncoder.getConfigurator().apply(tswerveCanCoderConfig);
+
     }
 
     public void setDesiredState(SwerveModuleState desiredState, boolean isOpenLoop) {
@@ -81,6 +92,8 @@ public class SwerveModule {
         angleEncoder.getConfigurator().apply(new CANcoderConfiguration());
         CANCoderUtil.setCANCoderBusUsage(angleEncoder, CCUsage.kMinimal);
         angleEncoder.getConfigurator().apply(Robot.ctreConfigs.swerveCanCoderConfig);
+
+        
     }
 
     private void configAngleMotor() {

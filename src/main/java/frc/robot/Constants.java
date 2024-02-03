@@ -87,13 +87,22 @@ public final class Constants {
                 public static final int kIntakeControllerPort = 1;
         }
 
+
+        public static final class magnetOffset {
+                public static final double Mod0 = 0.0068359375;
+                public static final double Mod1 = 0.4892578125;
+                public static final double Mod2 = 0;
+                public static final double Mod3 = 0;
+        }
+
+
         /* Module Specific Constants */
         /* Front Left Module - Module 0 */
         public static final class Mod0 {
             public static final int DRIVE_MOTOR_ID = 12;
             public static final int ANGLE_MOTOR_ID = 11;
             public static final int CAN_CODER_ID = 21;
-        //     public static final Rotation2d ANGLE_OFFSET = Rotation2d.fromDegrees(327.48046875);
+            //public static final Rotation2d ANGLE_OFFSET = Rotation2d.fromDegrees(327.48046875);
             public static final Rotation2d ANGLE_OFFSET =  Rotation2d.fromDegrees(0);
             public static final SwerveModuleConstants CONSTANTS =
                     new SwerveModuleConstants(DRIVE_MOTOR_ID, ANGLE_MOTOR_ID, CAN_CODER_ID, ANGLE_OFFSET);
@@ -104,7 +113,8 @@ public final class Constants {
             public static final int DRIVE_MOTOR_ID = 14;
             public static final int ANGLE_MOTOR_ID = 13;
             public static final int CAN_CODER_ID = 22;
-            //public static final Rotation2d ANGLE_OFFSET = Rotation2d.fromDegrees(286.34765625);
+            public static final double magnetOffset = 0;
+            //public static final Rotation2d ANGLE_OFFSET = Rotation2d.fromDegrees(100.34765625);
             public static final Rotation2d ANGLE_OFFSET =  Rotation2d.fromDegrees(0);
             public static final SwerveModuleConstants CONSTANTS =
                     new SwerveModuleConstants(DRIVE_MOTOR_ID, ANGLE_MOTOR_ID, CAN_CODER_ID, ANGLE_OFFSET);
@@ -115,6 +125,7 @@ public final class Constants {
             public static final int DRIVE_MOTOR_ID = 18;
             public static final int ANGLE_MOTOR_ID = 17;
             public static final int CAN_CODER_ID = 23;
+            public static final double magnetOffset = 0;
             //public static final Rotation2d ANGLE_OFFSET = Rotation2d.fromDegrees(55.01953125);
             public static final Rotation2d ANGLE_OFFSET = Rotation2d.fromDegrees(0);
             public static final SwerveModuleConstants CONSTANTS =
@@ -126,6 +137,7 @@ public final class Constants {
             public static final int DRIVE_MOTOR_ID = 15;
             public static final int ANGLE_MOTOR_ID = 16;
             public static final int CAN_CODER_ID = 24;
+            public static final double magnetOffset = 0;
             //public static final Rotation2d ANGLE_OFFSET = Rotation2d.fromDegrees(67.939453125);
             public static final Rotation2d ANGLE_OFFSET = Rotation2d.fromDegrees(0);
             public static final SwerveModuleConstants CONSTANTS =
@@ -149,6 +161,7 @@ public final class Constants {
                         K_MAX_ANGULAR_SPEED_RADIANS_PER_SECOND, K_MAX_ANGULAR_SPEED_RADIANS_PER_SECOND_SQUARED);
     }
 
+//Intake and shooter motor IDs
 public static final int pickUpID = 31;
 public static final int upperMotorID = 32;
 public static final int shooterOneID = 33;
