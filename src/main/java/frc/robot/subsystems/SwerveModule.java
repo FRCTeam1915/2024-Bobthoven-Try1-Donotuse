@@ -44,9 +44,19 @@ public class SwerveModule {
     public SwerveModule(int moduleNumber, SwerveModuleConstants moduleConstants,double magoffset, AbsoluteSensorRangeValue withAbsoluteSensorRange) {
         this.moduleNumber = moduleNumber;
         angleOffset = moduleConstants.angleOffset;
+        
+
+        
+
 
         /* Angle Encoder Config */
         angleEncoder = new CANcoder(moduleConstants.cancoderID);
+
+        CANcoderConfiguration tswerveCanCoderConfig = new CANcoderConfiguration();
+        tswerveCanCoderConfig.MagnetSensor.MagnetOffset = magoffset;
+        //tswerveCanCoderConfig.MagnetSensor.AbsoluteSensorRange = withAbsoluteSensorRange;
+        angleEncoder.getConfigurator().apply(tswerveCanCoderConfig);
+
         configAngleEncoder();
         // angleEncoder.setPositionToAbsolute();
         // angleEncoder.configSensorInitializationStrategy(SensorInitializationStrategy.BootToAbsolutePosition);
@@ -68,10 +78,7 @@ public class SwerveModule {
         lastAngle = getState().angle;
 
 
-        //CANcoderConfiguration tswerveCanCoderConfig = new CANcoderConfiguration();
-        //tswerveCanCoderConfig.MagnetSensor.MagnetOffset = magoffset;
-        //tswerveCanCoderConfig.MagnetSensor.AbsoluteSensorRange = withAbsoluteSensorRange;
-        //angleEncoder.getConfigurator().apply(tswerveCanCoderConfig);
+
 
     }
 
@@ -111,7 +118,9 @@ public class SwerveModule {
         angleController.setFF(Constants.Swerve.ANGLE_KFF);
         angleMotor.enableVoltageCompensation(Constants.Swerve.VOLTAGE_COMP);
         angleMotor.burnFlash();
+        System.out.println("------ Reset to Absolute -------");
         resetToAbsolute();
+        System.out.println("------ Done Reset to Absolute -------");
     }
 
     private void configDriveMotor() {

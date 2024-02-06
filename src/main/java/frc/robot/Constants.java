@@ -14,6 +14,8 @@ import frc.lib.config.SwerveModuleConstants;
 public final class Constants {
 
     public static final class Swerve {
+
+       
         public static final double STICK_DEADBAND = 0.1;
 
         //public static final int PIGEON_ID = 6;
@@ -92,7 +94,7 @@ public final class Constants {
 
         public static final class magnetOffset {
                 public static final class Mod0 {
-                        public static final double magnetOffset = 0;
+                        public static final double magnetOffset = 90;
                         public static final AbsoluteSensorRangeValue withAbsoluteSensorRange = AbsoluteSensorRangeValue.Signed_PlusMinusHalf;
                 }
                 public static final class Mod1 {
@@ -107,7 +109,8 @@ public final class Constants {
                         public static final double magnetOffset = -0.241;
                         public static final AbsoluteSensorRangeValue withAbsoluteSensorRange = AbsoluteSensorRangeValue.Signed_PlusMinusHalf;
                 }
-        }
+               
+        } 
 
 
         /* Module Specific Constants */
@@ -127,7 +130,6 @@ public final class Constants {
             public static final int DRIVE_MOTOR_ID = 14;
             public static final int ANGLE_MOTOR_ID = 13;
             public static final int CAN_CODER_ID = 22;
-            public static final double magnetOffset = 0;
             //public static final Rotation2d ANGLE_OFFSET = Rotation2d.fromDegrees(100.34765625);
             public static final Rotation2d ANGLE_OFFSET =  Rotation2d.fromDegrees(0);
             public static final SwerveModuleConstants CONSTANTS =
@@ -139,7 +141,6 @@ public final class Constants {
             public static final int DRIVE_MOTOR_ID = 18;
             public static final int ANGLE_MOTOR_ID = 17;
             public static final int CAN_CODER_ID = 23;
-            public static final double magnetOffset = 0;
             //public static final Rotation2d ANGLE_OFFSET = Rotation2d.fromDegrees(55.01953125);
             public static final Rotation2d ANGLE_OFFSET = Rotation2d.fromDegrees(45);
             public static final SwerveModuleConstants CONSTANTS =
@@ -151,7 +152,6 @@ public final class Constants {
             public static final int DRIVE_MOTOR_ID = 15;
             public static final int ANGLE_MOTOR_ID = 16;
             public static final int CAN_CODER_ID = 24;
-            public static final double magnetOffset = 0;
             //public static final Rotation2d ANGLE_OFFSET = Rotation2d.fromDegrees(67.939453125);
             public static final Rotation2d ANGLE_OFFSET = Rotation2d.fromDegrees(0);
             public static final SwerveModuleConstants CONSTANTS =

@@ -40,8 +40,7 @@ public class RobotContainer {
     /* Driver Buttons */
     
     //Code for using joysticks
-    private final XboxController robotCentric =
-       new XboxController(XboxController.Button.kLeftBumper.value);
+    //private final XboxController robotCentric = new XboxController(XboxController.Button.kLeftBumper.value);
     
     /* Subsystems */
     private final Swerve s_Swerve = new Swerve();
@@ -80,15 +79,22 @@ public class RobotContainer {
         final Intake lowerMotor;
         upperMotor = new Intake();
         lowerMotor = new Intake();
+        final Intake shooterMotorOne;
+        shooterMotorOne = new Intake();
+        final Intake shooterMotorTwo;
+        shooterMotorTwo = new Intake();
 
         Trigger Bbutton = m_IntakeController.b();
-        Bbutton.whileTrue(new upperIntake(upperMotor, true).repeatedly());
+        Bbutton.whileTrue(new upperIntake(upperMotor, lowerMotor, true).repeatedly());
     
         Trigger Xbutton = m_IntakeController.x();
         Xbutton.whileTrue(new pickUp(lowerMotor, true).repeatedly());
 
         Trigger Ybutton = m_IntakeController.y();
-        Ybutton.whileTrue(new lowerIntakeDrop(lowerMotor, true).repeatedly());
+        Ybutton.whileTrue(new lowerIntakeDrop(lowerMotor, upperMotor, true).repeatedly());
+
+        Trigger AButton = m_IntakeController.a();
+        AButton.whileTrue(new shooter(shooterMotorOne, shooterMotorTwo, true));
 
     }
 

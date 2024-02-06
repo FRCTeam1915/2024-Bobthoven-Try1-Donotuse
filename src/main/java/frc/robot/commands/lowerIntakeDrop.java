@@ -10,7 +10,7 @@ public class lowerIntakeDrop extends CommandBase{
     Intake upperMotor;
     boolean in;
 
-    public lowerIntakeDrop(Intake lowerMotor, boolean tin){
+    public lowerIntakeDrop(Intake lowerMotor, Intake upperMotor, boolean tin){
         in = tin;
         addRequirements(lowerMotor);
         
