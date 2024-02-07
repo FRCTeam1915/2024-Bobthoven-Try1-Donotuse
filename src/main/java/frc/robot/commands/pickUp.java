@@ -20,7 +20,7 @@ public class pickUp extends CommandBase{
     @Override
     public void execute(){
         //Pick up speed for intake
-        Intake.lowerMotor.set(ControlMode.PercentOutput, .5);
+        Intake.lowerMotor.set(ControlMode.PercentOutput, -.75);
         // Intake.upperMotor.set(ControlMode.PercentOutput, .5);
     }
 

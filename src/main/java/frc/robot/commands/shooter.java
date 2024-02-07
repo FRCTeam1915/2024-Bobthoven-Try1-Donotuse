@@ -18,7 +18,15 @@ public class shooter extends CommandBase{
     @Override
     public void execute(){
         //Shoots note out, speed can be changed
-        Intake.shooterMotorOne.set(ControlMode.PercentOutput, -1);
+        System.out.println("Shooter ----------");
+        Intake.shooterMotorOne.set(ControlMode.PercentOutput, 1);
         Intake.shooterMotorTwo.set(ControlMode.PercentOutput, -1);
+    }
+
+
+    @Override
+    public void end(boolean interrupted){
+        Intake.shooterMotorOne.set(ControlMode.PercentOutput,0);
+        Intake.shooterMotorTwo.set(ControlMode.PercentOutput,0);
     }
 }

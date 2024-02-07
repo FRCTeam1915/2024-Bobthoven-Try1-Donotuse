@@ -22,8 +22,8 @@ public class upperIntake extends CommandBase{
     public void execute(){
         //Pick up speed for intake
         // Intake.lowerMotor.set(ControlMode.PercentOutput, .5);
-        Intake.upperMotor.set(ControlMode.PercentOutput, .5);
-        Intake.lowerMotor.set(ControlMode.PercentOutput, .5);
+        Intake.upperMotor.set(ControlMode.PercentOutput, -.75);
+        Intake.lowerMotor.set(ControlMode.PercentOutput, .75);
     }
 
 

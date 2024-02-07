@@ -180,5 +180,7 @@ public static final int pickUpID = 31;
 public static final int upperMotorID = 32;
 public static final int shooterOneID = 33;
 public static final int shooterTwoID = 34;
+public static final int armMotorOne = 35;
+public static final int armMotorTwo = 36;
 
 }

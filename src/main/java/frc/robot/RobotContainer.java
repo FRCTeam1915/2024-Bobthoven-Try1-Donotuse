@@ -84,17 +84,20 @@ public class RobotContainer {
         final Intake shooterMotorTwo;
         shooterMotorTwo = new Intake();
 
-        Trigger Bbutton = m_IntakeController.b();
-        Bbutton.whileTrue(new upperIntake(upperMotor, lowerMotor, true).repeatedly());
+        Trigger xButton = m_IntakeController.x();
+        xButton.whileTrue(new upperIntake(upperMotor, lowerMotor, true).repeatedly());
     
-        Trigger Xbutton = m_IntakeController.x();
-        Xbutton.whileTrue(new pickUp(lowerMotor, true).repeatedly());
+        Trigger rightBumper = m_IntakeController.rightBumper();
+        rightBumper.whileTrue(new pickUp(lowerMotor, true).repeatedly());
 
-        Trigger Ybutton = m_IntakeController.y();
-        Ybutton.whileTrue(new lowerIntakeDrop(lowerMotor, upperMotor, true).repeatedly());
+        Trigger rightTrigger = m_IntakeController.rightTrigger();
+        rightTrigger.whileTrue(new lowerIntakeDrop(lowerMotor, upperMotor, true).repeatedly());
 
         Trigger AButton = m_IntakeController.a();
         AButton.whileTrue(new shooter(shooterMotorOne, shooterMotorTwo, true));
+
+        Trigger povDown = m_IntakeController.povDown();
+        
 
     }
 
