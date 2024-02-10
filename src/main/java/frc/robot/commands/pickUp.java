@@ -1,18 +1,24 @@
 package frc.robot.commands;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.subsystems.Intake;
 
 public class pickUp extends CommandBase{
-    Intake lowerMotor;
+    // Intake lowerMotor;
+    public static TalonSRX lowerMotor;
+    public static TalonSRX upperMotor;
     // Intake upperMotor;
     boolean in;
 
-    public pickUp(Intake lowerMotor, boolean tin){
+    public pickUp(boolean tin){
         in = tin;
-        addRequirements(lowerMotor);
+        lowerMotor = new TalonSRX(Constants.pickUpID);
+        upperMotor = new TalonSRX(Constants.upperMotorID);
+        // addRequirements(lowerMotor);
 
     }
 
@@ -20,14 +26,14 @@ public class pickUp extends CommandBase{
     @Override
     public void execute(){
         //Pick up speed for intake
-        Intake.lowerMotor.set(ControlMode.PercentOutput, -.75);
+        lowerMotor.set(ControlMode.PercentOutput, -.75);
         // Intake.upperMotor.set(ControlMode.PercentOutput, .5);
     }
 
 
     @Override
     public void end(boolean interrupted){
-        Intake.lowerMotor.set(ControlMode.PercentOutput,0);
+        lowerMotor.set(ControlMode.PercentOutput,0);
     }
 
 

@@ -75,29 +75,38 @@ public class RobotContainer {
 
         
 
-        final Intake upperMotor;
-        final Intake lowerMotor;
-        upperMotor = new Intake();
-        lowerMotor = new Intake();
-        final Intake shooterMotorOne;
-        shooterMotorOne = new Intake();
-        final Intake shooterMotorTwo;
-        shooterMotorTwo = new Intake();
+        // final Intake upperMotor;
+        // final Intake lowerMotor;
+        // upperMotor = new Intake();
+        // lowerMotor = new Intake();
+
+        // final Intake shooterMotorOne;
+        // shooterMotorOne = new Intake();
+        // final Intake shooterMotorTwo;
+        // shooterMotorTwo = new Intake();
+
+        // final Intake armMotorOne;
+        // final Intake armMotorTwo;
+        // armMotorOne = new Intake();
+        // armMotorTwo = new Intake();
 
         Trigger xButton = m_IntakeController.x();
-        xButton.whileTrue(new upperIntake(upperMotor, lowerMotor, true).repeatedly());
+        xButton.whileTrue(new upperIntake().repeatedly());
     
         Trigger rightBumper = m_IntakeController.rightBumper();
-        rightBumper.whileTrue(new pickUp(lowerMotor, true).repeatedly());
+        rightBumper.whileTrue(new pickUp(true).repeatedly());
 
         Trigger rightTrigger = m_IntakeController.rightTrigger();
-        rightTrigger.whileTrue(new lowerIntakeDrop(lowerMotor, upperMotor, true).repeatedly());
+        rightTrigger.whileTrue(new lowerIntakeDrop(true).repeatedly());
 
         Trigger AButton = m_IntakeController.a();
-        AButton.whileTrue(new shooter(shooterMotorOne, shooterMotorTwo, true));
+        AButton.whileTrue(new shooter(true));
 
         Trigger povDown = m_IntakeController.povDown();
-        
+        povDown.whileTrue(new intakeArm(-.1));
+
+        Trigger povUp = m_IntakeController.povUp();
+        povUp.whileTrue(new intakeArm(.1));
 
     }
 

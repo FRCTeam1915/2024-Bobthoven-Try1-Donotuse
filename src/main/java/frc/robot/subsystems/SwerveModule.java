@@ -52,10 +52,10 @@ public class SwerveModule {
         /* Angle Encoder Config */
         angleEncoder = new CANcoder(moduleConstants.cancoderID);
 
-        CANcoderConfiguration tswerveCanCoderConfig = new CANcoderConfiguration();
-        tswerveCanCoderConfig.MagnetSensor.MagnetOffset = magoffset;
+        //CANcoderConfiguration tswerveCanCoderConfig = new CANcoderConfiguration();
+        //tswerveCanCoderConfig.MagnetSensor.MagnetOffset = magoffset;
         //tswerveCanCoderConfig.MagnetSensor.AbsoluteSensorRange = withAbsoluteSensorRange;
-        angleEncoder.getConfigurator().apply(tswerveCanCoderConfig);
+        //angleEncoder.getConfigurator().apply(tswerveCanCoderConfig);
 
         configAngleEncoder();
         // angleEncoder.setPositionToAbsolute();
@@ -93,8 +93,10 @@ public class SwerveModule {
 
     private void resetToAbsolute() {
         //double absolutePosition = getCanCoder().getDegrees() - angleOffset.getDegrees();
-        double absolutePosition = angleEncoder.getAbsolutePosition().getValueAsDouble();
+        double absolutePosition = getCanCoder().getRotations() - angleOffset.getRotations();
+        //double absolutePosition = angleEncoder.getAbsolutePosition().getValueAsDouble();
         integratedAngleEncoder.setPosition(absolutePosition);
+        System.out.println("Angle offset ------- " + absolutePosition);
     }
 
     private void configAngleEncoder() {
