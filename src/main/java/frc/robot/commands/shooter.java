@@ -1,7 +1,6 @@
 package frc.robot.commands;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.revrobotics.CANSparkFlex;
 import com.revrobotics.CANSparkLowLevel;
 
@@ -10,23 +9,22 @@ import frc.robot.Constants;
 import frc.robot.subsystems.Intake;
 
 public class shooter extends CommandBase{
-    public static CANSparkFlex shooterMotorOne;
-    public static CANSparkFlex shooterMotorTwo;
+    public static CANSparkFlex shooterMotorOne = new CANSparkFlex(Constants.shooterMotorOne, CANSparkLowLevel.MotorType.kBrushless);
+    public static CANSparkFlex shooterMotorTwo = new CANSparkFlex(Constants.shooterMotorTwo, CANSparkLowLevel.MotorType.kBrushless);
     // Intake shooterMotorOne;
     // Intake shooterMotorTwo;
-    boolean in;
-    public shooter(boolean tin) {
+    double in;
+    public shooter(double tin) {
         in = tin;
-       // addRequirements(upperMotor);
-       shooterMotorOne = new CANSparkFlex(Constants.shooterOneID, CANSparkLowLevel.MotorType.kBrushless);
-        shooterMotorTwo = new CANSparkFlex(Constants.shooterTwoID, CANSparkLowLevel.MotorType.kBrushless);
+        //shooterMotorOne = new CANSparkFlex(Constants.shooterMotorOne, CANSparkLowLevel.MotorType.kBrushless);
+        // shooterMotorTwo = new CANSparkFlex(Constants.shooterMotorTwo, CANSparkLowLevel.MotorType.kBrushless);
     }
 
     @Override
     public void execute(){
         //Shoots note out, speed can be changed. Motor One should be positive and Motor Two should be negative
-        shooterMotorOne.set(.8);
-        shooterMotorTwo.set(-.8);
+        shooterMotorOne.set(in);
+        shooterMotorTwo.set(-in);
     }
 
 
@@ -34,5 +32,10 @@ public class shooter extends CommandBase{
     public void end(boolean interrupted){
         shooterMotorOne.set(0);
         shooterMotorTwo.set(0);
+    }
+
+    @Override
+    public boolean isFinished(){
+        return false;
     }
 }

@@ -100,13 +100,25 @@ public class RobotContainer {
         rightTrigger.whileTrue(new lowerIntakeDrop(true).repeatedly());
 
         Trigger AButton = m_IntakeController.a();
-        AButton.whileTrue(new shooter(true));
+        AButton.whileTrue(new shooter(.8));
+
+        Trigger Ybutton = m_IntakeController.y();
+        Ybutton.whileTrue(new shooter(.1));
+
+        Trigger Bbutton = m_IntakeController.b();
+        Bbutton.whileTrue(new shooter(-.15));
 
         Trigger povDown = m_IntakeController.povDown();
         povDown.whileTrue(new intakeArm(-.1));
 
         Trigger povUp = m_IntakeController.povUp();
         povUp.whileTrue(new intakeArm(.1));
+
+        Trigger povLeft = m_IntakeController.povLeft();
+        povLeft.whileTrue(new intakeArm(.025));
+
+        Trigger povRight = m_IntakeController.povRight();
+        povRight.whileTrue(new intakeArm(-.025));
 
     }
 

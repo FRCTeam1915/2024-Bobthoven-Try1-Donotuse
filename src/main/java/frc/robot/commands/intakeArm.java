@@ -5,7 +5,6 @@ import com.ctre.phoenix6.hardware.TalonFX;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
-import frc.robot.subsystems.Intake;
 
 public class intakeArm extends CommandBase{
     // Intake armMotorOne;
@@ -18,7 +17,6 @@ public class intakeArm extends CommandBase{
         in = tin;
         armMotorOne = new TalonFX(Constants.armMotorOne);
         armMotorTwo = new TalonFX(Constants.armMotorTwo);
-        // addRequirements(armMotorOne);
     }
 
     @Override
