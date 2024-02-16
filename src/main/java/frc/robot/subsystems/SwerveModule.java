@@ -13,6 +13,7 @@ import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
+import edu.wpi.first.wpilibj.ADIS16470_IMU;
 import frc.lib.config.SwerveModuleConstants;
 import frc.lib.math.OnboardModuleState;
 import frc.lib.util.CANCoderUtil;
@@ -23,6 +24,9 @@ import frc.robot.Constants;
 import frc.robot.Robot;
 
 public class SwerveModule {
+
+    // public ADIS16470_IMU gyro = new ADIS16470_IMU();
+
     public int moduleNumber;
     private Rotation2d lastAngle;
     private Rotation2d angleOffset;
@@ -42,6 +46,18 @@ public class SwerveModule {
                     Constants.Swerve.DRIVE_KS, Constants.Swerve.DRIVE_KV, Constants.Swerve.DRIVE_KA);
  
     public SwerveModule(int moduleNumber, SwerveModuleConstants moduleConstants,double magoffset, AbsoluteSensorRangeValue withAbsoluteSensorRange) {
+
+        //Causes the roboRIO to stay on this code for a second giving the swerve modules a chance to configure
+        // new Thread(() -> {
+        //     try {
+        //         Thread.sleep(1000);
+        //         // gyro.setGyroAngle(ADIS16470_IMU.IMUAxis.kZ, 0);
+        //     } catch (Exception e){
+        //     }
+        // }).start();
+           
+
+
         this.moduleNumber = moduleNumber;
         angleOffset = moduleConstants.angleOffset;
         
@@ -79,8 +95,16 @@ public class SwerveModule {
 
 
 
-
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
+
+
+
 
     public void setDesiredState(SwerveModuleState desiredState, boolean isOpenLoop) {
         // Custom optimize command, since default WPILib optimize assumes continuous controller which
@@ -119,9 +143,27 @@ public class SwerveModule {
         angleController.setD(Constants.Swerve.ANGLE_KD);
         angleController.setFF(Constants.Swerve.ANGLE_KFF);
         angleMotor.enableVoltageCompensation(Constants.Swerve.VOLTAGE_COMP);
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
         angleMotor.burnFlash();
         System.out.println("------ Reset to Absolute -------");
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
         resetToAbsolute();
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
         System.out.println("------ Done Reset to Absolute -------");
     }
 
@@ -167,7 +209,9 @@ public class SwerveModule {
     }
 
     private Rotation2d getAngle() {
-        return Rotation2d.fromDegrees(integratedAngleEncoder.getPosition());
+        return Rotation2d.fromDegrees(integratedAngleEncoder.getPosition() - angleOffset.getRotations());
+        //return Rotation2d.fromDegrees(integratedAngleEncoder.getPosition() + getCanCoder().getRotations() - angleOffset.getRotations());
+        //return Rotation2d.fromDegrees(integratedAngleEncoder.getPosition());
     }
 
     public Rotation2d getCanCoder() {

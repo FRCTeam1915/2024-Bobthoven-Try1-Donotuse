@@ -4,10 +4,16 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.DigitalOutput;
+import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.lib.config.CTREConfigs;
+
+
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -20,6 +26,20 @@ public class Robot extends TimedRobot {
     private Command m_autonomousCommand;
     private RobotContainer m_robotContainer;
 
+    public DigitalOutput ultrasonicTriggerPin = new DigitalOutput(0);
+    public final AnalogInput ultrasonic = new AnalogInput(0);
+    public double ultrasonicRange = 0;
+    // private double rawValue = ultrasonic.getValue();
+    private double rawValue;
+    private double voltageScaleFactor = 1;
+
+    public void turnOnSensorOne(){
+    ultrasonicTriggerPin.set(true);
+    }
+    public void turnOffSensors(){
+        ultrasonicTriggerPin.set(false);
+    }
+
     /**
      * This function is run when the robot is first started up and should be used for any
      * initialization code.
@@ -30,6 +50,7 @@ public class Robot extends TimedRobot {
         // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
         // autonomous chooser on the dashboard.
         m_robotContainer = new RobotContainer();
+        SmartDashboard.putNumber("Note Detector", 500);
     }
 
     /**
@@ -41,6 +62,9 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void robotPeriodic() {
+        rawValue = ultrasonic.getValue();
+        SmartDashboard.putNumber("Note Detector", rawValue);
+        voltageScaleFactor = 5/RobotController.getVoltage5V();
         // Runs the Scheduler.  This is responsible for polling buttons, adding newly-scheduled
         // commands, running already-scheduled commands, removing finished or interrupted commands,
         // and running subsystem periodic() methods.  This must be called from the robot's periodic
@@ -50,7 +74,9 @@ public class Robot extends TimedRobot {
 
     /** This function is called once each time the robot enters Disabled mode. */
     @Override
-    public void disabledInit() {}
+    public void disabledInit() {
+        turnOffSensors();
+    }
 
     @Override
     public void disabledPeriodic() {}
@@ -79,11 +105,14 @@ public class Robot extends TimedRobot {
         if (m_autonomousCommand != null) {
             m_autonomousCommand.cancel();
         }
+        turnOnSensorOne();
     }
 
     /** This function is called periodically during operator control. */
     @Override
-    public void teleopPeriodic() {}
+    public void teleopPeriodic() {
+        ultrasonicRange = ultrasonic.getValue()*voltageScaleFactor*0.125;
+    }
 
     @Override
     public void testInit() {

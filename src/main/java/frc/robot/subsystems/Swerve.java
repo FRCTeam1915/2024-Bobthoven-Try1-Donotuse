@@ -16,7 +16,7 @@ import frc.robot.Constants;
 
 public class Swerve extends SubsystemBase {
     //private final Pigeon2 gyro;
-    private ADIS16470_IMU gyro = new ADIS16470_IMU(); //Removed final
+    public ADIS16470_IMU gyro = new ADIS16470_IMU(); //Removed final
 
     private SwerveDriveOdometry swerveOdometry;
     private SwerveModule[] mSwerveMods;
