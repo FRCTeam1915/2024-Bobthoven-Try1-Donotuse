@@ -4,6 +4,9 @@
 
 package frc.robot;
 
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DigitalOutput;
 import edu.wpi.first.wpilibj.RobotController;
@@ -40,6 +43,7 @@ public class Robot extends TimedRobot {
         ultrasonicTriggerPin.set(false);
     }
 
+
     /**
      * This function is run when the robot is first started up and should be used for any
      * initialization code.
@@ -51,6 +55,7 @@ public class Robot extends TimedRobot {
         // autonomous chooser on the dashboard.
         m_robotContainer = new RobotContainer();
         SmartDashboard.putNumber("Note Detector", 500);
+
     }
 
     /**
@@ -65,6 +70,8 @@ public class Robot extends TimedRobot {
         rawValue = ultrasonic.getValue();
         SmartDashboard.putNumber("Note Detector", rawValue);
         voltageScaleFactor = 5/RobotController.getVoltage5V();
+
+        
         // Runs the Scheduler.  This is responsible for polling buttons, adding newly-scheduled
         // commands, running already-scheduled commands, removing finished or interrupted commands,
         // and running subsystem periodic() methods.  This must be called from the robot's periodic

@@ -185,5 +185,7 @@ public static final int shooterMotorOne = 33;
 public static final int shooterMotorTwo = 34;
 public static final int armMotorOne = 35;
 public static final int armMotorTwo = 36;
+public static final int CAMERA_RES_X = 320;
+public static final int CAMERA_RES_Y = 240;
 
 }

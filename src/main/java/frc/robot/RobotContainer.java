@@ -6,6 +6,8 @@ package frc.robot;
 
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
+import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -47,6 +49,10 @@ public class RobotContainer {
 
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
     public RobotContainer() {
+
+    //UsbCamera camera = CameraServer.startAutomaticCapture();
+    // camera.setResolution(Constants.CAMERA_RES_X, Constants.CAMERA_RES_Y);
+
         s_Swerve.setDefaultCommand(
 
                 new TeleopSwerve(
