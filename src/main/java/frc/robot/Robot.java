@@ -4,6 +4,8 @@
 
 package frc.robot;
 
+import edu.wpi.first.math.MathUtil;
+import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
@@ -15,6 +17,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.lib.config.CTREConfigs;
+import frc.robot.Constants.Swerve.OperatorConstants;
 
 
 
@@ -25,6 +28,12 @@ import frc.lib.config.CTREConfigs;
  * project.
  */
 public class Robot extends TimedRobot {
+
+    // Slew rate limiters to make joystick inputs more gentle; 1/3 sec from 0 to 1.
+    private final SlewRateLimiter m_xspeedLimiter = new SlewRateLimiter(3);
+    private final SlewRateLimiter m_yspeedLimiter = new SlewRateLimiter(3);
+    private final SlewRateLimiter m_rotLimiter = new SlewRateLimiter(3);
+
     public static CTREConfigs ctreConfigs;
     private Command m_autonomousCommand;
     private RobotContainer m_robotContainer;
@@ -130,4 +139,21 @@ public class Robot extends TimedRobot {
     /** This function is called periodically during test mode. */
     @Override
     public void testPeriodic() {}
+
+
+
+    // private void drive(boolean fieldRelative){
+    //     var xSpeed =
+    //     -m_xspeedLimiter.calculate(MathUtil.applyDeadband(m_driverController.getLeftY(), 0.02))
+    //         * Constants.Swerve.MAX_SPEED;
+
+    //     var ySpeed =
+    //     -m_yspeedLimiter.calculate(MathUtil.applyDeadband(m_driverController.getLeftX(), 0.02))
+    //         * Constants.Swerve.MAX_SPEED;
+
+    //     var rot =
+    //     -m_rotLimiter.calculate(MathUtil.applyDeadband(m_driverController.getRightX(), 0.02))
+    //         * Drivetrain.Swerve.MAX_SPEED;
+    // }
+
 }

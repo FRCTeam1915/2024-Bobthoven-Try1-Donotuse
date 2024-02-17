@@ -8,6 +8,7 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.cscore.UsbCamera;
+import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -31,13 +32,13 @@ public class RobotContainer {
     //private final Joystick driver = new Joystick(0);
 
 
-    private final CommandXboxController m_driverController = new CommandXboxController(OperatorConstants.kDriverControllerPort);
+    public final CommandXboxController m_driverController = new CommandXboxController(OperatorConstants.kDriverControllerPort);
     private final CommandXboxController m_IntakeController = new CommandXboxController(OperatorConstants.kIntakeControllerPort);
     
     /* Drive Controls */
     private final int translationAxis = XboxController.Axis.kLeftY.value;
     private final int strafeAxis = XboxController.Axis.kLeftX.value;
-    private final int rotationAxis = XboxController.Axis.kRightX.value;
+    public int rotationAxis = XboxController.Axis.kRightX.value;
 
     /* Driver Buttons */
     
@@ -45,10 +46,14 @@ public class RobotContainer {
     //private final XboxController robotCentric = new XboxController(XboxController.Button.kLeftBumper.value);
     
     /* Subsystems */
-    private final Swerve s_Swerve = new Swerve();
+    public final static Swerve s_Swerve = new Swerve();
+
+    
 
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
     public RobotContainer() {
+
+        
 
     //UsbCamera camera = CameraServer.startAutomaticCapture();
     // camera.setResolution(Constants.CAMERA_RES_X, Constants.CAMERA_RES_Y);
@@ -125,6 +130,15 @@ public class RobotContainer {
 
         Trigger povRight = m_IntakeController.povRight();
         povRight.whileTrue(new intakeArm(-.025));
+
+        Trigger getAButton = m_driverController.a();
+        getAButton.whileTrue(new driveToNote());
+    
+
+        
+
+
+
 
     }
 

@@ -71,12 +71,12 @@ public final class Constants {
         public static final double ANGLE_CONVERSION_FACTOR = 360.0 / ANGLE_GEAR_RATIO;
 
         /* Swerve Profiling Values */
-        public static final double MAX_SPEED = 4.5; // meters per second
+        public static double MAX_SPEED = 4.5; // meters per second, may need final
         public static final double MAX_ANGULAR_VELOCITY = 11.5;
 
         /* Neutral Modes */
         public static final IdleMode ANGLE_NEUTRAL_MODE = IdleMode.kBrake;
-        public static final IdleMode DRIVE_NEUTRAL_MODE = IdleMode.kBrake;
+        public static final IdleMode DRIVE_NEUTRAL_MODE = IdleMode.kCoast; //Temporary change
 
         /* Motor Inverts */
         public static final boolean DRIVE_INVERT = false;
@@ -185,7 +185,10 @@ public static final int shooterMotorOne = 33;
 public static final int shooterMotorTwo = 34;
 public static final int armMotorOne = 35;
 public static final int armMotorTwo = 36;
+
+
 public static final int CAMERA_RES_X = 320;
 public static final int CAMERA_RES_Y = 240;
+
 
 }

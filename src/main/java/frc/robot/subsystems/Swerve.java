@@ -46,7 +46,7 @@ public class Swerve extends SubsystemBase {
                 });
 
         field = new Field2d();
-        SmartDashboard.putData("Field", field);
+        // SmartDashboard.putData("Field", field);
     }
 
     public void drive(

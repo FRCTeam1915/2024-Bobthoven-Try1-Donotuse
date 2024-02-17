@@ -93,14 +93,6 @@ public class SwerveModule {
 
         lastAngle = getState().angle;
 
-
-
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
     }
 
 
@@ -143,27 +135,12 @@ public class SwerveModule {
         angleController.setD(Constants.Swerve.ANGLE_KD);
         angleController.setFF(Constants.Swerve.ANGLE_KFF);
         angleMotor.enableVoltageCompensation(Constants.Swerve.VOLTAGE_COMP);
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+
         angleMotor.burnFlash();
         System.out.println("------ Reset to Absolute -------");
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+
         resetToAbsolute();
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+
         System.out.println("------ Done Reset to Absolute -------");
     }
 

@@ -11,10 +11,10 @@ import java.util.function.DoubleSupplier;
 
 public class TeleopSwerve extends Command {
     private Swerve s_Swerve;
-    private DoubleSupplier translationSup;
-    private DoubleSupplier strafeSup;
-    private DoubleSupplier rotationSup;
-    private BooleanSupplier robotCentricSup;
+    public static DoubleSupplier translationSup; //Y
+    public static DoubleSupplier strafeSup; //X
+    public static DoubleSupplier rotationSup;
+    public static BooleanSupplier robotCentricSup;
 
     private SlewRateLimiter translationLimiter = new SlewRateLimiter(3.0);
     private SlewRateLimiter strafeLimiter = new SlewRateLimiter(3.0);
@@ -37,7 +37,7 @@ public class TeleopSwerve extends Command {
 
     @Override
     public void execute() {
-        /* Get Values, Deadband*/
+        //Gets Deadband Values
         double translationVal =
                 translationLimiter.calculate(
                         MathUtil.applyDeadband(translationSup.getAsDouble(), Constants.Swerve.STICK_DEADBAND));
