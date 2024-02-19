@@ -14,6 +14,7 @@ import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj.ADIS16470_IMU;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.lib.config.SwerveModuleConstants;
 import frc.lib.math.OnboardModuleState;
 import frc.lib.util.CANCoderUtil;
@@ -40,6 +41,9 @@ public class SwerveModule {
 
     private final SparkPIDController driveController;
     private final SparkPIDController angleController;
+
+    private double initialAngleOffset;
+    private Rotation2d RobotAngle;
 
     private final SimpleMotorFeedforward feedforward =
             new SimpleMotorFeedforward(
@@ -109,10 +113,12 @@ public class SwerveModule {
 
     private void resetToAbsolute() {
         //double absolutePosition = getCanCoder().getDegrees() - angleOffset.getDegrees();
-        double absolutePosition = getCanCoder().getRotations() - angleOffset.getRotations();
+        double absolutePosition = getCanCoder().getDegrees() - angleOffset.getRotations();
         //double absolutePosition = angleEncoder.getAbsolutePosition().getValueAsDouble();
         integratedAngleEncoder.setPosition(absolutePosition);
         System.out.println("Angle offset ------- " + absolutePosition);
+        // store the initial angle offset for later use
+        initialAngleOffset = getCanCoder().getRotations();
     }
 
     private void configAngleEncoder() {
@@ -186,9 +192,12 @@ public class SwerveModule {
     }
 
     private Rotation2d getAngle() {
-        return Rotation2d.fromDegrees(integratedAngleEncoder.getPosition() - angleOffset.getRotations());
+        //return Rotation2d.fromDegrees(integratedAngleEncoder.getPosition() - angleOffset.getDegrees());
         //return Rotation2d.fromDegrees(integratedAngleEncoder.getPosition() + getCanCoder().getRotations() - angleOffset.getRotations());
-        //return Rotation2d.fromDegrees(integratedAngleEncoder.getPosition());
+        // return Rotation2d.fromDegrees(integratedAngleEncoder.getPosition());
+        RobotAngle = Rotation2d.fromDegrees(integratedAngleEncoder.getPosition() + initialAngleOffset - angleOffset.getRotations());
+        SmartDashboard.putNumber("modAngle"+moduleNumber, RobotAngle.getDegrees());
+        return Rotation2d.fromDegrees(integratedAngleEncoder.getPosition() + initialAngleOffset - angleOffset.getRotations());
     }
 
     public Rotation2d getCanCoder() {
@@ -196,6 +205,7 @@ public class SwerveModule {
     }
 
     public SwerveModuleState getState() {
+        
         return new SwerveModuleState(driveEncoder.getVelocity(), getAngle());
     }
 
