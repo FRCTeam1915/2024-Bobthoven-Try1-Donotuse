@@ -19,7 +19,8 @@ import frc.robot.Constants.Swerve.OperatorConstants;
 import frc.robot.autos.*;
 import frc.robot.commands.*;
 import frc.robot.subsystems.*;
-
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -49,6 +50,7 @@ public class RobotContainer {
     public final static Swerve s_Swerve = new Swerve();
 
     
+    public static SendableChooser<Double> autonomousPosition = new SendableChooser<>();
 
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
     public RobotContainer() {
@@ -70,7 +72,13 @@ public class RobotContainer {
 
         // Configure the button bindings
         configureButtonBindings();
-    }
+
+        SmartDashboard.putData("Autonomous Setting", autonomousPosition);
+        autonomousPosition.addOption("Position 1 - Left Side", 10.0);
+        autonomousPosition.setDefaultOption("Position 2 - Middle", 7.5);
+        autonomousPosition.addOption("Position 3 - Right Side", 10.0);
+    }   
+
 
     /**
      * Use this method to define your button->command mappings. Buttons can be created by
